@@ -11,7 +11,7 @@ import com.comcast.example.model.Movie;
 public class MovieSetExample {
 
 	public static void main(String[] args) {
-		String fileName = "resources/movies.csv";
+		String fileName = "src/main/resources/movies.csv";
 
 		Set<Movie> movies = loadMoviesFromFile(fileName);
 

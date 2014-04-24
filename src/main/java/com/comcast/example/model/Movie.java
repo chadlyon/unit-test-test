@@ -38,10 +38,10 @@ public class Movie {
 				&& (int) this.getRelease_year() == (int) oMovie.getRelease_year();
 	}
 
-	//@Override
-	//public int hashCode() {
-//		return this.name.hashCode() + (release_year != null ? release_year.hashCode() : 0);
-	//}
+	@Override
+	public int hashCode() {
+		return this.name.hashCode() + (release_year != null ? release_year.hashCode() : 0);
+	}
 
 	@Override
 	public String toString() {
