@@ -15,31 +15,21 @@ public class MovieSetExample {
 
 		Set<Movie> movies = loadMoviesFromFile(fileName);
 
-		for (Movie movie : movies) {
-			if (movie.getName().contains(new StringBuffer("&"))) {
-				System.out.println(movie.toString());
-			}
-		}
+		printMovieSetItemsWithSubstring(movies, "&");
 
-		for (Movie movie : movies) {
-			movie.setName(movie.getName().replaceAll("&", "and"));
-		}
+		normalizeMovieTitles(movies);
 
 		System.out.println("\n------------------------\n");
 
-		for (Movie movie : movies) {
-			if (movie.getName().contains(new StringBuffer("and"))) {
-				System.out.println(movie.toString());
-			}
-		}
-
+		printMovieSetItemsWithSubstring(movies, "and");
+		
 		Movie testMovie1 = new Movie("Benny and Joon", 1993);
 
 		System.out.println("\nSet Contains " + testMovie1.toString() + ": "
 				+ movies.contains(testMovie1));
 	}
 
-	private static Set<Movie> loadMoviesFromFile(String fileName) {
+	public static Set<Movie> loadMoviesFromFile(String fileName) {
 		HashSet<Movie> movies = new HashSet<Movie>();
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(new File(
@@ -63,5 +53,19 @@ public class MovieSetExample {
 			throw new RuntimeException(e);
 		}
 		return movies;
+	}
+	
+	public static void printMovieSetItemsWithSubstring(Set<Movie> movies, String substring) {
+		for (Movie movie : movies) {
+			if (movie.getName().contains(substring)) {
+				System.out.println(movie.toString());
+			}
+		}
+	}
+	
+	public static void normalizeMovieTitles(Set<Movie> movies) {
+		for (Movie movie : movies) {
+			movie.setName(movie.getName().replaceAll("&", "and"));
+		}
 	}
 }
