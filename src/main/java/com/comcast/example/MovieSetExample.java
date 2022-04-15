@@ -7,21 +7,24 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.comcast.example.model.Movie;
+import com.comcast.example.utils.MovieSetUtils;
 
 public class MovieSetExample {
 
 	public static void main(String[] args) {
 		String fileName = "src/main/resources/movies.csv";
 
+		MovieSetUtils utils = new MovieSetUtils();
+
 		Set<Movie> movies = loadMoviesFromFile(fileName);
 
-		printMovieSetItemsWithSubstring(movies, "&");
+		utils.printMovieSetItemsWithSubstring(movies, "&");
 
-		normalizeMovieTitles(movies);
+		utils.normalizeMovieTitles(movies);
 
 		System.out.println("\n------------------------\n");
 
-		printMovieSetItemsWithSubstring(movies, "and");
+		utils.printMovieSetItemsWithSubstring(movies, "and");
 		
 		Movie testMovie1 = new Movie("Benny and Joon", 1993);
 
@@ -53,19 +56,5 @@ public class MovieSetExample {
 			throw new RuntimeException(e);
 		}
 		return movies;
-	}
-	
-	public static void printMovieSetItemsWithSubstring(Set<Movie> movies, String substring) {
-		for (Movie movie : movies) {
-			if (movie.getName().contains(substring)) {
-				System.out.println(movie.toString());
-			}
-		}
-	}
-	
-	public static void normalizeMovieTitles(Set<Movie> movies) {
-		for (Movie movie : movies) {
-			movie.setName(movie.getName().replaceAll("&", "and"));
-		}
 	}
 }
